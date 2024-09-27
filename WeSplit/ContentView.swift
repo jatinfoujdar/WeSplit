@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var name = ""
+    let students = ["harry", "hermonie", "roy"]
+    @State private var selectedStudent = "harry"
     
     var body: some View {
-        Form{
-            TextField("Enter Your Name",text: $name)
-            Text("Hello \(name)")
+        NavigationStack{
+            Form{
+                Picker("Select Your Student", selection: $selectedStudent){
+                    ForEach(students, id: \.self){
+                        Text($0)
+                    }
+                }
+            }
+            .navigationTitle("Select a Student")
         }
     }
 }
-
 #Preview {
     ContentView()
 }
